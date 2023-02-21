@@ -19,21 +19,26 @@
 
 ## Items テーブル
 
-| Column      | Type       | Options                        | 
-| ----------- | ---------- | ------------------------------ |
-| product     | text       | null: false                    |
-| content     | text       | null: false                    |
-| category    | string     | null: false                    |
-| status      | string     | null: false                    |
-| charge      | string     | null: false                    |
-| prefecture  | string     | null: false                    |
-| preparation | string     | null: false                    |
-| price       | integer    | null: false                    |
-| user        | references | null: false, foreign_key: true |
+| Column         | Type       | Options                        | 
+| -------------- | ---------- | ------------------------------ |
+| product        | string     | null: false                    |
+| content        | text       | null: false                    |
+| category_id    | integer    | null: false                    |
+| status_id      | integer    | null: false                    |
+| charge_id      | integer    | null: false                    |
+| prefecture_id  | integer    | null: false                    |
+| preparation_id | integer    | null: false                    |
+| price          | integer    | null: false                    |
+| user           | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
 - has_one :order
+- belongs_to :category
+- belongs_to :status
+- belongs_to :charge
+- belongs_to :prefecture
+- belongs_to :preparation
 
 ## Orders テーブル
 
@@ -47,17 +52,18 @@
 - belongs_to :item
 - has_one :delivery
 
-## deliverys テーブル
+## deliveries テーブル
 
-| Column     | Type       | Options                        | 
-| ---------- | ---------- | ------------------------------ |
-| postcode   | string     | null: false                    |
-| prefecture | string     | null: false                    |
-| city       | string     | null: false                    |
-| block      | string     | null: false                    |
-| building   | string     |                                |
-| phone      | string     | null: false                    |
-| order      | references | null: false, foreign_key: true |
+| Column        | Type       | Options                        | 
+| ------------- | ---------- | ------------------------------ |
+| postcode      | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| block         | string     | null: false                    |
+| building      | string     |                                |
+| phone         | string     | null: false                    |
+| order         | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :order
+- belongs_to :prefecture
