@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates :nickname, presence: true
   with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ } do
     validates :last_name
-    validates :first_name  
+    validates :first_name
   end
   with_options presence: true, format: { with: /\A[ァ-ヶー]+\z/ } do
     validates :last_name_kana
