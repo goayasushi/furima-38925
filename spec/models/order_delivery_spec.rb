@@ -48,7 +48,7 @@ RSpec.describe OrderDelivery, type: :model do
       it 'phoneが空だと保存できないこと' do
         @order_delivery.phone = ''
         @order_delivery.valid?
-        expect(@order_delivery.errors.full_messages).to include("Phone is invalid")
+        expect(@order_delivery.errors.full_messages).to include("Phone can't be blank")
       end
       it 'phoneが半角のハイフンを含んだ形式では保存できないこと' do
         @order_delivery.phone = '111-1111-1111'
@@ -57,6 +57,16 @@ RSpec.describe OrderDelivery, type: :model do
       end
       it 'phoneが全角数字だと保存できないこと' do
         @order_delivery.phone = '１１１１１１１１１１１'
+        @order_delivery.valid?
+        expect(@order_delivery.errors.full_messages).to include('Phone is invalid')
+      end
+      it 'phoneが9桁以下だと保存できないこと' do
+        @order_delivery.phone = '111111111'
+        @order_delivery.valid?
+        expect(@order_delivery.errors.full_messages).to include('Phone is invalid')
+      end
+      it 'phoneが12桁以上だと保存できないこと' do
+        @order_delivery.phone = '111111111111'
         @order_delivery.valid?
         expect(@order_delivery.errors.full_messages).to include('Phone is invalid')
       end
